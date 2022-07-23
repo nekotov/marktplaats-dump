@@ -134,17 +134,18 @@ while idl < auto_size:
         except:
             continue
     con.commit()
-    done_count += len(resp["listings"])
     progress_bar(done_count, total_resp)
     if done_count >= total_resp:
         exit(0)
     if len(resp["listings"]) == 0:
-        print("Real amount of products:", done_count)
+        print(f"Real amount of products in {sortOrder[auto_order%3]}-{order[1 if auto_order>=3 else 0]}:{done_count}")
         auto_order+=1
         idl = -1
+        continue
     if auto_order == 6:
         print("Done")
         exit(0)
+    done_count += len(resp["listings"])
     #if len(resp["listings"]) < 100 if total_resp>100 else total_resp:
     #    print(f"Dropped speed to {len(resp['listings'])}/{100 if total_resp>100 else total_resp}")
     #    time.sleep(5)
